@@ -20,8 +20,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [Tooltip("Instantiates this prefab on a plane at the touch location.")]
         GameObject m_PlacedPrefab;
 
+        public AROcclusionManager aROcclusionManager;
         public Text logText;
-        public GameObject[] prefabs;
+        // public GameObject[] prefabs;
 
         /// <summary>
         /// The prefab to instantiate on touch.
@@ -40,6 +41,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void Awake()
         {
             m_RaycastManager = GetComponent<ARRaycastManager>();
+
+#if !UNITY_EDITOR
+            if (aROcclusionManager.descriptor.supportsEnvironmentDepthImage)
+            {
+                aROcclusionManager.enabled = true;
+            }
+            else
+            {
+                aROcclusionManager.enabled = false;
+            }
+#endif
         }
 
         bool TryGetTouchPosition(out Vector2 touchPosition)
@@ -58,13 +70,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        public void SelectPrefab(int index)
-        {
-            m_PlacedPrefab = prefabs[index];
-            logText.text = $"Selected : { prefabs[index].name} ";
-        }
+        // public void SelectPrefab(int index)
+        // {
+        //     m_PlacedPrefab = prefabs[index];
+        //     logText.text = $"Selected : { prefabs[index].name} ";
+        // }
         void Update()
         {
+            if (spawnedObject != null) return;
             if (!TryGetTouchPosition(out Vector2 touchPosition))
                 return;
 
@@ -74,12 +87,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 // will be the closest hit.
                 var hitPose = s_Hits[0].pose;
 
-                // if (spawnedObject == null)
+                if (spawnedObject == null)
                 {
-                    // spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-                    Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-                    m_PlacedPrefab = null;
-                    logText.text = "";
+                    spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                    // Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                    // m_PlacedPrefab = null;
+                    // logText.text = "";
+                    logText.gameObject.SetActive(false);
+
                 }
                 // else
                 // {
@@ -91,5 +106,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
         static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
         ARRaycastManager m_RaycastManager;
+
+        public void QuitAPP()
+        {
+            Application.Quit();
+        }
     }
+
+
 }
