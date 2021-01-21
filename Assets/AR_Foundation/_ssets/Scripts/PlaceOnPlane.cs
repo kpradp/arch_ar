@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 namespace UnityEngine.XR.ARFoundation.Samples
 {
     /// <summary>
@@ -18,6 +19,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField]
         [Tooltip("Instantiates this prefab on a plane at the touch location.")]
         GameObject m_PlacedPrefab;
+
+        public Text logText;
+        public GameObject[] prefabs;
 
         /// <summary>
         /// The prefab to instantiate on touch.
@@ -50,6 +54,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
             return false;
         }
 
+        public void RestartScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        public void SelectPrefab(int index)
+        {
+            m_PlacedPrefab = prefabs[index];
+            logText.text = $"Selected : { prefabs[index].name} ";
+        }
         void Update()
         {
             if (!TryGetTouchPosition(out Vector2 touchPosition))
@@ -61,14 +74,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 // will be the closest hit.
                 var hitPose = s_Hits[0].pose;
 
-                if (spawnedObject == null)
+                // if (spawnedObject == null)
                 {
-                    spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                    // spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                    Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                    m_PlacedPrefab = null;
+                    logText.text = "";
                 }
-                else
-                {
-                    spawnedObject.transform.position = hitPose.position;
-                }
+                // else
+                // {
+                //     spawnedObject.transform.position = hitPose.position;
+                // }
             }
         }
 

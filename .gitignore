@@ -1,8 +1,7 @@
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
+
 /[_Ss]erverData/
 /[_S]erverData/
 /[Rr]ecordings/
@@ -37,7 +36,7 @@ ExportedObj/
 sysinfo.txt
 
 # Builds
-*.apk
+
 *.unitypackage
 
 
@@ -91,24 +90,7 @@ Dependencies*
 Nuget.config*
 *.blob
 *.blob
-Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset
-Assets/_ARFramework/Experiences/2.Industry4.0/Scenes/2.Carlsberg 1.unity.meta
-Assets/_ARFramework/Experiences/2.Industry4.0/Scenes/2.Carlsberg 1.unity
-Assets/_ARFramework/Experiences/2.Industry4.0/NewModelsWithAnimations/Mesh/New Lighting Settings.lighting.meta
-Assets/_ARFramework/Experiences/2.Industry4.0/NewModelsWithAnimations/Mesh/New Lighting Settings.lighting
-Assets/_ARFramework/Experiences/2.Industry4.0/H.meta
-Assets/_ARFramework/Experiences/1.Brochure/Scenes/1.Brochure 2.unity
-Assets/_ARFramework/Experiences/1.Brochure/Scenes/1.Brochure 2.unity.meta
-node_modules
-Assets/AddressableAssetsData/iOS.meta
-Assets/AddressableAssetsData/iOS/addressables_content_state.bin
-Assets/AddressableAssetsData/iOS/addressables_content_state.bin.meta
-Assets/PlayFabEditorExtensions/Editor/Resources/MostRecentPackage.unitypackage.meta
-Assets/_ARFramework/.DS_Store
-Assets/.DS_Store
-.DS_Store
-Assets/_ARFramework/UI/.DS_Store
-Assets/_ARFramework/.DS_Store
+ 
 
 plugins/ARFoundationRemoteSource
 Assets/_ARFramework/Christmas/Christmas_UI_Temp_ROY.meta
